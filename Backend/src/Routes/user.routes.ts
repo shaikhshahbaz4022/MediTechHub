@@ -30,7 +30,7 @@ UserRouter.post("/register", async (req: Request, res: Response) => {
 
 UserRouter.post("/login", async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const { email, password }: User = req.body;
 
     const isUserPresent = await UserModel.findOne({ email });
     if (!isUserPresent) return res.status(404).send({ msg: "Register First" });
