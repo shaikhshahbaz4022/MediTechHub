@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { connection } from "./connection/config";
 import UserRouter from "./Routes/user.routes";
+import ProductRouter from "./Routes/product.routes";
 const app = express();
 app.use(express.json());
 app.get("/", (req: express.Request, res: express.Response) => {
@@ -8,6 +9,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
 });
 
 app.use("/user", UserRouter);
+app.use("/product", ProductRouter);
 app.listen(8080, async () => {
   try {
     await connection;
