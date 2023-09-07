@@ -4,6 +4,7 @@ import UserRouter from "./Routes/user.routes";
 import ProductRouter from "./Routes/product.routes";
 import cartRouter from "./Routes/cart.routes";
 import auth from "./Middleware/auth";
+import OrderRouter from "./Routes/order.routes";
 const app = express();
 app.use(express.json());
 app.get("/", (req: express.Request, res: express.Response) => {
@@ -14,6 +15,7 @@ app.use("/user", UserRouter);
 app.use("/product", ProductRouter);
 app.use(auth);
 app.use("/cart", cartRouter);
+app.use("/order", OrderRouter);
 app.listen(8080, async () => {
   try {
     await connection;
