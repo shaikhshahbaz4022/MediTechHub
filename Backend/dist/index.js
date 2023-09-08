@@ -10,7 +10,9 @@ const product_routes_1 = __importDefault(require("./Routes/product.routes"));
 const cart_routes_1 = __importDefault(require("./Routes/cart.routes"));
 const auth_1 = __importDefault(require("./Middleware/auth"));
 const order_routes_1 = __importDefault(require("./Routes/order.routes"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.get("/", (req, res) => {
     res.send("Home Route Working ");
