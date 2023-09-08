@@ -5,7 +5,9 @@ import ProductRouter from "./Routes/product.routes";
 import cartRouter from "./Routes/cart.routes";
 import auth from "./Middleware/auth";
 import OrderRouter from "./Routes/order.routes";
+import cors from "cors";
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.get("/", (req: express.Request, res: express.Response) => {
   res.send("Home Route Working ");
