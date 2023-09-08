@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import { Navbar } from "../Components/navbar";
+import HomePage from "../Pages/Homepage";
 function Routing() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Navbar />} />
+        <Route path="/" element={<HomePage />} />
       </Routes>
     </div>
   );
