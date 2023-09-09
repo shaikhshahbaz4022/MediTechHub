@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_REQUEST, LOGIN_FAILURE, LOGIN_SUCCESS } from "./actionType";
+import { LOGIN_REQUEST, LOGIN_FAILURE, LOGIN_SUCCESS, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from "./actionType";
 const url = `https://meditechhub.onrender.com`
 export const LoginPostData = (userInput) => async (dispatch) => {
 
@@ -16,4 +16,18 @@ export const LoginPostData = (userInput) => async (dispatch) => {
 
 
 }
+
+export const RegisterPostData = (userInput) => async (dispatch) => {
+    try {
+        dispatch({ type: REGISTER_REQUEST })
+        const res = await axios.post(`${url}/user/register`, userInput)
+        dispatch({ type: REGISTER_SUCCESS })
+        return res.data
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: REGISTER_FAILURE })
+        return error.response.data
+    }
+}
 //we have to use try catch only , because .then .catch is blocked Scoped
+
