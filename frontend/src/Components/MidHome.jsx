@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Image } from "@chakra-ui/react";
+import { Box, Grid, Image } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../Redux/userReducer/action";
