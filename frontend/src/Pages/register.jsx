@@ -8,8 +8,28 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
+import { RegisterPostData } from "../Redux/authReducer/action";
 export function RegisterPage() {
+  const disatch = useDispatch();
+  const [formData, setformData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  async function HandleSubmit(e) {
+    e.preventDefault();
+    try {
+      const res = await disatch(RegisterPostData(formData));
+      if (res.msg === "Registration Succesfully") {
+        alert(res.msg);
+      } else {
+        alert(res.msg);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <Box
       p={4}
@@ -30,7 +50,7 @@ export function RegisterPage() {
         >
           Sign Up
         </Box>
-        <form style={{ padding: "20px" }}>
+        <form onSubmit={HandleSubmit} style={{ padding: "20px" }}>
           <FormControl id="username">
             <FormLabel>Username</FormLabel>
             <Input
@@ -38,7 +58,11 @@ export function RegisterPage() {
               name="username"
               placeholder="Enter your username"
               rounded="full"
+              value={formData.username}
               focusBorderColor="teal.500"
+              onChange={(e) =>
+                setformData({ ...formData, username: e.target.value })
+              }
             />
           </FormControl>
           <FormControl id="email">
@@ -46,8 +70,10 @@ export function RegisterPage() {
             <Input
               type="email"
               name="email"
-              //   value={formData.email}
-              //   onChange={handleInputChange}
+              value={formData.email}
+              onChange={(e) =>
+                setformData({ ...formData, email: e.target.value })
+              }
               placeholder="Enter your email"
               rounded="full"
               focusBorderColor="teal.500"
@@ -58,8 +84,10 @@ export function RegisterPage() {
             <Input
               type="password"
               name="password"
-              //   value={formData.password}
-              //   onChange={handleInputChange}
+              value={formData.password}
+              onChange={(e) =>
+                setformData({ ...formData, password: e.target.value })
+              }
               placeholder="Enter your password"
               rounded="full"
               focusBorderColor="teal.500"
