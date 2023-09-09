@@ -53,7 +53,8 @@ export function Navbar() {
             <Box>
               <Image
                 w={"36"}
-                src="https://nms-assets.s3-ap-south-1.amazonaws.com/images/cms/aw_rbslider/slides/1663609483_netmeds-new-logo.svg"
+                rounded={"lg"}
+                src="https://i.ibb.co/2g3Bvtr/Medi-Techhub.jpg"
                 alt="Error"
               />
             </Box>

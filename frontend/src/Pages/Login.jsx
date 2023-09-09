@@ -18,6 +18,7 @@ function Login() {
     try {
       const res = await dispatch(LoginPostData(userInput));
       if (res.msg === "Login Succesfully") alert(res.msg);
+      else console.log(res);
     } catch (error) {
       console.log(error);
       alert(error.msg);
