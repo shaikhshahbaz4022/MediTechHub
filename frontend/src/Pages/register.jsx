@@ -3,12 +3,13 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Heading,
   Input,
   VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { RegisterPostData } from "../Redux/authReducer/action";
 export function RegisterPage() {
   const disatch = useDispatch();
@@ -17,12 +18,17 @@ export function RegisterPage() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   async function HandleSubmit(e) {
     e.preventDefault();
     try {
       const res = await disatch(RegisterPostData(formData));
       if (res.msg === "Registration Succesfully") {
         alert(res.msg);
+        navigate("/login");
+      } else if ("user Already Present") {
+        alert(res.msg);
+        navigate("/login");
       } else {
         alert(res.msg);
       }
