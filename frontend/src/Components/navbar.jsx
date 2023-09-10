@@ -129,7 +129,7 @@ export function Navbar() {
                   display={"flex"}
                   alignItems={"center"}
                 >
-                  <Text>
+                  <Box>
                     {userDetails && userDetails.user ? (
                       <Flex
                         px={"2"}
@@ -145,8 +145,13 @@ export function Navbar() {
                           {userDetails.user.username}
                         </Text>
                       </Flex>
-                    ) : null}
-                  </Text>
+                    ) : (
+                      <FontAwesomeIcon
+                        style={{ marginLeft: "55px" }}
+                        icon={faUser}
+                      />
+                    )}
+                  </Box>
                 </Box>
               )}
               <Box
@@ -205,11 +210,11 @@ export function Navbar() {
           <VStack
             spacing={2}
             p={2}
-            bg={"gray.500"} // Set background color
+            bg={"gray.500"}
             position="absolute"
             top="100%"
             right="5"
-            zIndex="10" // Set a higher z-index
+            zIndex="10"
           >
             <Text textColor={"white"} onClick={closeMenu}>
               <Link>Services</Link>
