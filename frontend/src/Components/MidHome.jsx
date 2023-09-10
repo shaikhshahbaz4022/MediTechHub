@@ -123,8 +123,8 @@ export function Midhome() {
             <Box p={"2"}>
               <Heading my={"3"}>MEDITECH Premium</Heading>
               <Text my={"3"}>
-                Earn extra HK Cash & Enjoy more discounts and <Box as="br" />{" "}
-                deals than anyone else!
+                Earn extra HK Cash & Enjoy more discounts and <br /> deals than
+                anyone else!
               </Text>
               <Button my={"3"}>Be a Part Now!</Button>
             </Box>
@@ -149,11 +149,9 @@ export function Midhome() {
               <Heading my={"3"}>Refer & Earn</Heading>
               <Text my={"3"}>
                 Tell your friends to shop at
-                <Box as="br" /> HealthKart. They get Rs.200 off
-                <Box as="br" /> when they shop with us the 1st time
-                <Box as="br" /> & you get Rs. 200 off on your next{" "}
-                <Box as="br" />
-                order.
+                <br /> HealthKart. They get Rs.200 off
+                <br /> when they shop with us the 1st time
+                <br /> & you get Rs. 200 off on your next <br /> order.
               </Text>
               <Flex>
                 <Text my={"3"}>Refer Now</Text>
@@ -197,7 +195,7 @@ export function Midhome() {
                 Book An Appointment
               </Button>
               <Text my={"2"}>
-                * Get your customized nutrition <Box as="br" />
+                * Get your customized nutrition <br />
                 and lifestyle plan
               </Text>
             </Box>
