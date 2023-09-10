@@ -45,11 +45,12 @@ ProductRouter.get("/byid/:id", async (req, res) => {
 ProductRouter.get("/paginate", async (req, res) => {
     try {
         const { limit, page } = req.query;
-        const skip = parseInt(limit) * (parseInt(page) - 1);
+        const skip = parseInt(limit) * (parseInt(page) - 1); // for page 3 -> 5 * (3-1) = 10 skip
+        const length = await products_model_1.ProductModel.find().count();
         const data = await products_model_1.ProductModel.find()
             .skip(skip)
             .limit(parseInt(limit));
-        res.status(200).send(data);
+        res.status(200).send({ data, length });
     }
     catch (error) {
         res.status(404).send({ msg: error.message });

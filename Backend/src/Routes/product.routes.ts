@@ -43,10 +43,11 @@ ProductRouter.get("/paginate", async (req: Request, res: Response) => {
   try {
     const { limit, page } = req.query;
     const skip = parseInt(limit as string) * (parseInt(page as string) - 1); // for page 3 -> 5 * (3-1) = 10 skip
+    const length = await ProductModel.find().count();
     const data: Product[] = await ProductModel.find()
       .skip(skip)
       .limit(parseInt(limit as string));
-    res.status(200).send(data);
+    res.status(200).send({ data, length });
   } catch (error: any) {
     res.status(404).send({ msg: error.message });
   }
@@ -54,7 +55,7 @@ ProductRouter.get("/paginate", async (req: Request, res: Response) => {
 ProductRouter.get("/filter", async (req: Request, res: Response) => {
   try {
     const { category } = req.query;
-    const data = await ProductModel.find({ category });
+    const data: Product[] = await ProductModel.find({ category });
     return res.status(200).json(data);
   } catch (error: any) {
     res.status(404).send({ msg: error.message });
