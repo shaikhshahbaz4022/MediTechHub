@@ -12,6 +12,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import {
   faFileUpload,
   faUser,
@@ -26,7 +27,8 @@ import { useState } from "react";
 export function Navbar() {
   const [isSmallerThanMd] = useMediaQuery("(max-width: 768px)");
   const [isMenuOpen, setMenuOpen] = useState(false);
-
+  const userDetails = JSON.parse(localStorage.getItem("userDetails")) || {};
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
@@ -118,16 +120,66 @@ export function Navbar() {
                 <FontAwesomeIcon icon={faCartShopping} />
                 <Text>Cart</Text>
               </Box>
+              {userDetails && (
+                <Box
+                  gap={"7px"}
+                  justifyContent={"space-between"}
+                  w={"14"}
+                  color={"white"}
+                  display={"flex"}
+                  alignItems={"center"}
+                >
+                  <Text>
+                    {userDetails && userDetails.user ? (
+                      <Flex
+                        px={"2"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
+                      >
+                        <FontAwesomeIcon icon={faUser} />
+                        <Text
+                          fontSize={"xl"}
+                          fontFamily={"sans-serif"}
+                          ml={"2"}
+                        >
+                          {userDetails.user.username}
+                        </Text>
+                      </Flex>
+                    ) : null}
+                  </Text>
+                </Box>
+              )}
               <Box
                 justifyContent={"space-between"}
-                w={"16"}
+                w={"18"}
                 color={"white"}
                 gap={"7px"}
                 display={"flex"}
                 alignItems={"center"}
               >
-                <FontAwesomeIcon icon={faUser} />
-                <Text textColor={"white"}> SignUp/SignIn </Text>
+                <Text textColor={"white"}>
+                  {userDetails && userDetails.token ? (
+                    <Button
+                      ml={"8"}
+                      onClick={() => {
+                        localStorage.clear();
+                        setTimeout(() => {
+                          navigate("/");
+                        }, 1000);
+                      }}
+                    >
+                      Logout
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => {
+                        navigate("/login");
+                      }}
+                    >
+                      SignUp/SignIn
+                    </Button>
+                  )}
+                </Text>
               </Box>
             </HStack>
           ) : null}
@@ -183,6 +235,9 @@ export function Navbar() {
       <Box my={{ base: "5" }} fontSize={"lg"} _hover={{ bg: "gray.50" }}>
         <Flex justifyContent={"space-evenly"} alignItems={"center"}>
           <Button
+            onClick={() => {
+              navigate("/products");
+            }}
             _hover={{
               outline: "2px solid gray",
               outlineWidth: "1px",

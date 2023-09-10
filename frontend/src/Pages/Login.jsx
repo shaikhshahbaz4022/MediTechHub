@@ -2,11 +2,13 @@ import { Box, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { LoginPostData } from "../Redux/authReducer/action";
+import { useNavigate } from "react-router-dom";
 function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
   const store = useSelector((store) => store.authReducer);
   console.log(store);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   //   const userDetails = JSON.parse(localStorage.getItem("userDetails")) || {};
   //   console.log(userDetails);
   async function handleSubmit(e) {
@@ -17,11 +19,21 @@ function Login() {
     };
     try {
       const res = await dispatch(LoginPostData(userInput));
-      if (res.msg === "Login Succesfully") alert(res.msg);
-      else console.log(res);
+      console.log(res);
+      if (res.msg === "Login Succesfully") {
+        alert(res.msg);
+        navigate("/");
+      } else if ("Register First") {
+        alert(res.msg);
+        setTimeout(() => {
+          navigate("/register");
+        }, 2000);
+      } else {
+        alert(res.msg);
+      }
     } catch (error) {
       console.log(error);
-      alert(error.msg);
+      alert(error);
     }
   }
 
