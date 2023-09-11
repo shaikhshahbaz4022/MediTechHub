@@ -22,22 +22,27 @@ function ParticularProduct() {
   const dispatch = useDispatch();
   const product = useSelector((store) => store.userReducer.particular);
   const { token } = JSON.parse(localStorage.getItem("userDetails"));
+  const [change, setChange] = useState(false);
   const cartdata = useSelector((store) => store.userReducer.cart);
-  const [change, setChange] = useState(cartdata);
+  console.log("cart", cartdata);
+
   useEffect(() => {
     dispatch(getCartData(token));
-  }, [dispatch, token]);
-
-  //loading
-  const loading = useSelector((store) => store.userReducer.isLoading);
-  useEffect(() => {
     dispatch(getParticular(productID));
-  }, [dispatch, productID]);
+  }, [dispatch, token, productID]);
+
+  useEffect(() => {
+    if (change || !change) {
+      dispatch(getCartData(token));
+    }
+  }, [dispatch, token, change]);
+  //loading
+  // const loading = useSelector((store) => store.userReducer.isLoading);
 
   async function HandleClick() {
     const res = await dispatch(addToCart(productID, token));
-    alert(res.msg);
     setChange(!change);
+    alert(res.msg);
   }
   // if (loading) {
   //   return (
@@ -126,8 +131,7 @@ function ParticularProduct() {
         </Box>
         <Box w={"2xl"}>
           <Text textColor={"teal.500"} fontSize={"xl"} my={"6"}>
-            {cartdata.length}
-            Items In Carts
+            {cartdata.length} Items In Carts
           </Text>
           <Button
             onClick={() => {
