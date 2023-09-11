@@ -22,10 +22,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCategory, getData } from "../Redux/userReducer/action";
+import { useNavigate } from "react-router-dom";
 export function ProductPage() {
   const data = useSelector((store) => store.userReducer.data);
   const loading = useSelector((store) => store.userReducer.isLoading);
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
   const length = parseInt(localStorage.getItem("length"));
   function HandleChange(value) {
     console.log(value);
@@ -239,6 +241,9 @@ export function ProductPage() {
           >
             {data.map((el, index) => (
               <Box
+                onClick={() => {
+                  navigate(`/products/${el._id}`);
+                }}
                 key={index}
                 boxShadow="md"
                 borderWidth="1px"

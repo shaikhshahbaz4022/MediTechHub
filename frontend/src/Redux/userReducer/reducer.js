@@ -1,9 +1,10 @@
-import { CATEGORY_FALURE, CATEGORY_REQUEST, CATEGORY_SUCCESS, PRODUCT_FALURE, PRODUCT_REQUEST, PRODUCT_SUCCESS } from "./actionType";
+import { CATEGORY_FALURE, CATEGORY_REQUEST, CATEGORY_SUCCESS, PARTICULAR_FALURE, PARTICULAR_REQUEST, PARTICULAR_SUCCESS, PRODUCT_FALURE, PRODUCT_REQUEST, PRODUCT_SUCCESS } from "./actionType";
 
 const initState = {
     data: [],
     isLoading: false,
     isError: false,
+    particular: {}
 
 }
 
@@ -22,6 +23,12 @@ export const reducer = (state = initState, { type, payload }) => {
             localStorage.setItem("length", Math.ceil(payload.length / 6))
             return { ...state, isLoading: false, data: payload }
         case CATEGORY_FALURE:
+            return { ...state, isLoading: false, isError: true }
+        case PARTICULAR_REQUEST:
+            return { ...state, isLoading: true }
+        case PARTICULAR_SUCCESS:
+            return { ...state, isLoading: false, particular: payload }
+        case PARTICULAR_FALURE:
             return { ...state, isLoading: false, isError: true }
         default:
             return state
