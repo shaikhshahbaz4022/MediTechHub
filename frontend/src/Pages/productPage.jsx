@@ -27,9 +27,11 @@ export function ProductPage() {
   const data = useSelector((store) => store.userReducer.data);
   const loading = useSelector((store) => store.userReducer.isLoading);
   const [page, setPage] = useState(1);
+  const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
   const length = parseInt(localStorage.getItem("length"));
   function HandleChange(value) {
+    setSelected(value);
     console.log(value);
     dispatch(getCategory(value));
   }
@@ -83,7 +85,7 @@ export function ProductPage() {
             <Text fontWeight={"semibold"} fontSize={"xl"} my={"4"}>
               Sub Category
             </Text>
-            <RadioGroup onChange={HandleChange}>
+            <RadioGroup onChange={HandleChange} value={selected}>
               <Flex
                 my={"4"}
                 justifyContent={"space-between"}
