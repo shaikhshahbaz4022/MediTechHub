@@ -1,4 +1,4 @@
-import { CATEGORY_FALURE, CATEGORY_REQUEST, CATEGORY_SUCCESS, PRODUCT_FALURE, PRODUCT_REQUEST, PRODUCT_SUCCESS } from "./actionType";
+import { CATEGORY_FALURE, CATEGORY_REQUEST, CATEGORY_SUCCESS, PARTICULAR_FALURE, PARTICULAR_REQUEST, PARTICULAR_SUCCESS, PRODUCT_FALURE, PRODUCT_REQUEST, PRODUCT_SUCCESS } from "./actionType";
 import axios from 'axios'
 const url = `https://meditechhub.onrender.com`
 export const getData = (page) => (dispatch) => {
@@ -23,4 +23,16 @@ export const getCategory = (category) => async (dispatch) => {
         console.log(error);
         dispatch({ type: CATEGORY_FALURE })
     }
+}
+
+export const getParticular = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: PARTICULAR_REQUEST })
+        const res = await axios.get(`${url}/product/byid/${id}`)
+        dispatch({ type: PARTICULAR_SUCCESS, payload: res.data })
+    } catch (error) {
+        console.log(error)
+        dispatch({ type: PARTICULAR_FALURE })
+    }
+
 }
