@@ -11,6 +11,7 @@ const cart_routes_1 = __importDefault(require("./Routes/cart.routes"));
 const auth_1 = __importDefault(require("./Middleware/auth"));
 const order_routes_1 = __importDefault(require("./Routes/order.routes"));
 const cors_1 = __importDefault(require("cors"));
+const payment_routes_1 = __importDefault(require("./Routes/payment.routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
@@ -22,6 +23,7 @@ app.use("/product", product_routes_1.default);
 app.use(auth_1.default);
 app.use("/cart", cart_routes_1.default);
 app.use("/order", order_routes_1.default);
+app.use("/payment", payment_routes_1.default);
 app.listen(8080, async () => {
     try {
         await config_1.connection;

@@ -5,6 +5,7 @@ import { RegisterPage } from "../Pages/register";
 import { ProductPage } from "../Pages/productPage";
 import ParticularProduct from "../Pages/particular";
 import { CartPage } from "../Pages/CartPage";
+import { PaymentPage } from "../Pages/payment";
 
 function Routing() {
   return (
@@ -16,6 +17,7 @@ function Routing() {
         <Route path="/products" element={<ProductPage />} />
         <Route path="/products/:productID" element={<ParticularProduct />} />
         <Route path="/cartpage" element={<CartPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
       </Routes>
     </div>
   );
