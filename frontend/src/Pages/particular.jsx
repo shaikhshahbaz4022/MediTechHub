@@ -37,31 +37,31 @@ function ParticularProduct() {
     }
   }, [dispatch, token, change]);
   //loading
-  // const loading = useSelector((store) => store.userReducer.isLoading);
+  const loading = useSelector((store) => store.userReducer.isLoading);
 
   async function HandleClick() {
     const res = await dispatch(addToCart(productID, token));
     setChange(!change);
     alert(res.msg);
   }
-  // if (loading) {
-  //   return (
-  //     <Box>
-  //       <Navbar />
-  //       <Flex justifyContent={"center"}>
-  //         <Bars
-  //           height="80"
-  //           width="80"
-  //           color="#0097A7"
-  //           ariaLabel="bars-loading"
-  //           wrapperStyle={{}}
-  //           wrapperClass=""
-  //           visible={true}
-  //         />
-  //       </Flex>
-  //     </Box>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <Box>
+        <Navbar />
+        <Flex justifyContent={"center"}>
+          <Bars
+            height="80"
+            width="80"
+            color="#0097A7"
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </Flex>
+      </Box>
+    );
+  }
   return (
     <>
       <Navbar />
