@@ -18,6 +18,7 @@ import {
   getCartData,
 } from "../Redux/userReducer/action";
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "../Components/navbar";
 
 export function CartPage() {
   const cartdata = useSelector((store) => store.userReducer.cart);
@@ -53,6 +54,7 @@ export function CartPage() {
   localStorage.setItem("amount", ref);
   return (
     <Box>
+      <Navbar />
       <Flex
         flexDirection={{ base: "column", md: "column", lg: "row" }}
         mx={"auto"}
@@ -168,7 +170,7 @@ export function CartPage() {
           </Box>
         </Box>
 
-        <VStack border={"1px"}>
+        <VStack>
           <Box
             w={{ base: "100%", md: "fit-content" }}
             rounded={"sm"}
@@ -225,15 +227,6 @@ export function CartPage() {
               </Flex>
               <FontAwesomeIcon icon={faChevronRight} />
             </Flex>
-          </Box>
-          <Box
-            w={{ base: "100%", md: "fit-content" }}
-            rounded={"sm"}
-            borderWidth={"1px"}
-            borderColor={"gray.300"}
-            p={{ base: "4", md: "6" }}
-          >
-            <Box w={{ base: "100%", md: "md" }}> </Box>
           </Box>
         </VStack>
       </Flex>
