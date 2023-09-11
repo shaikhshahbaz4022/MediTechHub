@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { faChevronRight, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   DecrementProd,
@@ -17,12 +17,14 @@ import {
   IncrementProd,
   getCartData,
 } from "../Redux/userReducer/action";
+import { useNavigate } from "react-router-dom";
 
 export function CartPage() {
   const cartdata = useSelector((store) => store.userReducer.cart);
   const [change, setChange] = useState(false);
   const dispatch = useDispatch();
   const { token } = JSON.parse(localStorage.getItem("userDetails"));
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getCartData(token));
   }, [dispatch, token]);
@@ -48,6 +50,7 @@ export function CartPage() {
   for (let i = 0; i < cartdata.length; i++) {
     ref += cartdata[i].productID.price * cartdata[i].quantity;
   }
+  localStorage.setItem("amount", ref);
   return (
     <Box>
       <Flex
@@ -183,7 +186,7 @@ export function CartPage() {
                 Cart total: ₹ {ref.toFixed(2)}
               </Text>
               <Button
-                // onClick={() => navigate("/cartpage")}
+                onClick={() => navigate("/payment")}
                 textAlign={"center"}
                 bg={"teal.500"}
                 textColor={"white"}

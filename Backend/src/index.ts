@@ -6,6 +6,7 @@ import cartRouter from "./Routes/cart.routes";
 import auth from "./Middleware/auth";
 import OrderRouter from "./Routes/order.routes";
 import cors from "cors";
+import paymentrouter from "./Routes/payment.routes";
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use("/product", ProductRouter);
 app.use(auth);
 app.use("/cart", cartRouter);
 app.use("/order", OrderRouter);
+app.use("/payment", paymentrouter);
 app.listen(8080, async () => {
   try {
     await connection;
