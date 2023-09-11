@@ -1,10 +1,11 @@
-import { CATEGORY_FALURE, CATEGORY_REQUEST, CATEGORY_SUCCESS, PARTICULAR_FALURE, PARTICULAR_REQUEST, PARTICULAR_SUCCESS, PRODUCT_FALURE, PRODUCT_REQUEST, PRODUCT_SUCCESS } from "./actionType";
+import { CART_FALURE, CART_GET_FALURE, CART_GET_REQUEST, CART_GET_SUCCESS, CART_REQUEST, CART_SUCCESS, CATEGORY_FALURE, CATEGORY_REQUEST, CATEGORY_SUCCESS, PARTICULAR_FALURE, PARTICULAR_REQUEST, PARTICULAR_SUCCESS, PRODUCT_FALURE, PRODUCT_REQUEST, PRODUCT_SUCCESS } from "./actionType";
 
 const initState = {
     data: [],
     isLoading: false,
     isError: false,
-    particular: {}
+    particular: {},
+    cart: []
 
 }
 
@@ -30,6 +31,19 @@ export const reducer = (state = initState, { type, payload }) => {
             return { ...state, isLoading: false, particular: payload }
         case PARTICULAR_FALURE:
             return { ...state, isLoading: false, isError: true }
+        case CART_REQUEST:
+            return { ...state, isLoading: true }
+        case CART_SUCCESS:
+            return { ...state, isLoading: false }
+        case CART_FALURE:
+            return { ...state, isLoading: false, isError: true }
+        case CART_GET_REQUEST:
+            return { ...state, isLoading: true }
+        case CART_GET_SUCCESS:
+            return { ...state, isLoading: false, cart: payload }
+        case CART_GET_FALURE:
+            return { ...state, isLoading: false, isError: true }
+
         default:
             return state
     }
