@@ -16,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
 import { LoginPostData } from "../Redux/authReducer/action";
 import { Link, useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
 
@@ -35,11 +36,23 @@ function Login() {
       const res = await dispatch(LoginPostData(userInput));
       console.log(res);
       if (res.msg === "Login Succesfully") {
-        toast.success(res.msg);
+        toast.success(res.msg, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
 
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       } else if (res.msg === "Register First") {
         toast.error(res.msg);
+
         setTimeout(() => {
           navigate("/register");
         }, 2000);
@@ -63,7 +76,18 @@ function Login() {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <Stack
         spacing={8}
         mx={"auto"}
