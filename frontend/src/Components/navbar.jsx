@@ -50,8 +50,12 @@ export function Navbar() {
         fontSize={"lg"}
         fontFamily={"sans-serif"}
       >
-        <Flex alignItems={"center"} justifyContent={"space-between"}>
-          <HStack alignItems={"center"}>
+        <Flex
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          width={"90%"}
+        >
+          <HStack alignItems={"center"} justifyContent={"space-between"}>
             <Box>
               <Image
                 w={"36"}

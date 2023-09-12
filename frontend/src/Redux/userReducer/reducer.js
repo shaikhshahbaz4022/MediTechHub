@@ -32,7 +32,7 @@ export const reducer = (state = initState, { type, payload }) => {
         case PARTICULAR_FALURE:
             return { ...state, isLoading: false, isError: true }
         case CART_REQUEST:
-            return { ...state, isLoading: true }
+            return { ...state, isLoading: false }
         case CART_SUCCESS:
             return { ...state, isLoading: false }
         case CART_FALURE:

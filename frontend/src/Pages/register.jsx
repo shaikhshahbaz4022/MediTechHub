@@ -1,18 +1,29 @@
 import {
+  Flex,
   Box,
-  Button,
   FormControl,
   FormLabel,
   Input,
-  VStack,
+  InputGroup,
+  InputRightElement,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Link,
+  Tooltip,
 } from "@chakra-ui/react";
+
 import React, { useState } from "react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
 import { RegisterPostData } from "../Redux/authReducer/action";
+
 export function RegisterPage() {
   const disatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setformData] = useState({
     username: "",
     email: "",
@@ -20,6 +31,7 @@ export function RegisterPage() {
   });
   const navigate = useNavigate();
   async function HandleSubmit(e) {
+    console.log("Clicked");
     e.preventDefault();
     try {
       const res = await disatch(RegisterPostData(formData));
@@ -37,79 +49,108 @@ export function RegisterPage() {
     }
   }
   return (
-    <Box
-      p={4}
-      mt={"40"}
-      maxW="400px"
-      mx="auto"
-      boxShadow="lg"
-      rounded="lg"
-      bg="white"
+    <Flex
+      style={{
+        backgroundImage: `url('https://i.ibb.co/hBT2HYn/Untitled-Design-7.jpg')`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <VStack spacing={6} align="stretch">
-        <Box
-          as="h2"
-          fontSize="2xl"
-          textAlign="center"
-          color="teal.500"
-          fontWeight="bold"
-        >
-          Sign Up
-        </Box>
-        <form onSubmit={HandleSubmit} style={{ padding: "20px" }}>
-          <FormControl id="username">
-            <FormLabel>Username</FormLabel>
+      <Box
+        rounded={"lg"}
+        bg={useColorModeValue("white", "gray.700")}
+        boxShadow={"lg"}
+        p={8}
+        width="400px" // Increase the width of the form
+      >
+        <Stack spacing={4}>
+          <Stack align={"center"}>
+            <Heading fontSize={"4xl"} textAlign={"center"}>
+              Register
+            </Heading>
+          </Stack>
+          <FormControl id="name">
+            <FormLabel>Name</FormLabel>
             <Input
-              type="text"
-              name="username"
-              placeholder="Enter your username"
-              rounded="full"
               value={formData.username}
-              focusBorderColor="teal.500"
               onChange={(e) =>
                 setformData({ ...formData, username: e.target.value })
               }
+              type="text"
+              placeholder="Enter Your Name "
             />
           </FormControl>
-          <FormControl id="email">
-            <FormLabel>Email Address</FormLabel>
+          <FormControl id="email" isRequired>
+            <FormLabel>Email address</FormLabel>
             <Input
-              type="email"
-              name="email"
+              placeholder="Enter Email Address"
               value={formData.email}
               onChange={(e) =>
                 setformData({ ...formData, email: e.target.value })
               }
-              placeholder="Enter your email"
-              rounded="full"
-              focusBorderColor="teal.500"
+              type="email"
             />
           </FormControl>
-          <FormControl id="password">
+          <FormControl id="password" isRequired>
             <FormLabel>Password</FormLabel>
-            <Input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={(e) =>
-                setformData({ ...formData, password: e.target.value })
-              }
-              placeholder="Enter your password"
-              rounded="full"
-              focusBorderColor="teal.500"
-            />
+            <InputGroup>
+              <Input
+                placeholder="Enter Correct Password"
+                value={formData.password}
+                onChange={(e) =>
+                  setformData({ ...formData, password: e.target.value })
+                }
+                type={showPassword ? "text" : "password"}
+              />
+              <InputRightElement h={"full"}>
+                <Button
+                  variant={"ghost"}
+                  onClick={() =>
+                    setShowPassword((showPassword) => !showPassword)
+                  }
+                >
+                  {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
           </FormControl>
-          <Button
-            type="submit"
-            colorScheme="teal"
-            mt={6}
-            rounded="full"
-            _hover={{ bg: "teal.600" }}
+          <Tooltip
+            label="Please Provide Valid Email & Password"
+            aria-label="Email Password"
+            isDisabled={
+              formData.email && formData.password && formData.username
+            }
           >
-            Sign Up
-          </Button>
-        </form>
-      </VStack>
-    </Box>
+            <Button
+              loadingText="Submitting"
+              size="lg"
+              bg={"teal.500"}
+              color={"white"}
+              _hover={{
+                bg: "teal.700",
+              }}
+              isDisabled={
+                formData.email === "" ||
+                formData.password === "" ||
+                formData.username === ""
+              }
+              onClick={HandleSubmit}
+            >
+              Sign up
+            </Button>
+          </Tooltip>
+          <Text align={"center"}>
+            Already a user?{" "}
+            <Link href="/login" color={"teal.800"}>
+              Login
+            </Link>
+          </Text>
+        </Stack>
+      </Box>
+    </Flex>
   );
 }
