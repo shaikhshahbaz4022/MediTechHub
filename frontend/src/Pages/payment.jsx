@@ -21,7 +21,7 @@ import { getCartData } from "../Redux/userReducer/action";
 
 export function PaymentPage() {
   const navigate = useNavigate();
-  const { token } = JSON.parse(localStorage.getItem("userDetails"));
+  const { token, user } = JSON.parse(localStorage.getItem("userDetails"));
   const amount = localStorage.getItem("amount");
   const cartData = useSelector((store) => store.userReducer.cart);
   const [toggle, setToggle] = useState(false);
@@ -98,11 +98,17 @@ export function PaymentPage() {
               </Heading>
               <Box>
                 <Text>Name:</Text>
-                <Input type="text" placeholder="Enter your Name" width="100%" />
+                <Input
+                  value={user.username}
+                  type="text"
+                  placeholder="Enter your Name"
+                  width="100%"
+                />
               </Box>
               <Box>
                 <Text>Email:</Text>
                 <Input
+                  value={user.email}
                   type="email"
                   placeholder="Enter your email"
                   width="100%"
