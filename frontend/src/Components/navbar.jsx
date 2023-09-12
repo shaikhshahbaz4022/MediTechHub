@@ -122,7 +122,9 @@ export function Navbar() {
                 alignItems={"center"}
               >
                 <FontAwesomeIcon icon={faCartShopping} />
-                <Text>Cart</Text>
+                <Text>
+                  <Link href="/cartpage">Cart</Link>
+                </Text>
               </Box>
               {userDetails && (
                 <Box
@@ -221,23 +223,49 @@ export function Navbar() {
             zIndex="10"
           >
             <Text textColor={"white"} onClick={closeMenu}>
-              <Link>Services</Link>
+              <Link href="/products">Products</Link>
             </Text>
             <Text textColor={"white"} onClick={closeMenu}>
-              Contractors
+              <Link href="/cartpage">CartPage</Link>
             </Text>
             <Text textColor={"white"} onClick={closeMenu}>
-              Lobby
+              <Link href="/register">Register</Link>
             </Text>
             <Text textColor={"white"} onClick={closeMenu}>
-              Sign Up
+              <Link href="/login">Login</Link>
             </Text>
-            <Text textColor={"white"} onClick={closeMenu}>
-              Offers
-            </Text>
-            <Text textColor={"white"} onClick={closeMenu}>
-              Account
-            </Text>
+            <Box
+              justifyContent={"space-between"}
+              w={"18"}
+              color={"white"}
+              gap={"7px"}
+              display={"flex"}
+              alignItems={"center"}
+            >
+              <Text textColor={"white"}>
+                {userDetails && userDetails.token ? (
+                  <Button
+                    ml={"8"}
+                    onClick={() => {
+                      localStorage.clear();
+                      setTimeout(() => {
+                        navigate("/");
+                      }, 1000);
+                    }}
+                  >
+                    Logout
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
+                    SignUp/SignIn
+                  </Button>
+                )}
+              </Text>
+            </Box>
           </VStack>
         )}
       </Box>
@@ -254,28 +282,38 @@ export function Navbar() {
           >
             Shop By Category
           </Button>
-          <Link _hover={{ color: "gray" }}>Best Sellers</Link>
-          <Link _hover={{ color: "gray" }}>Brands</Link>
+          <Link href="/products" _hover={{ color: "gray" }}>
+            Best Sellers
+          </Link>
+          <Link href="/products" _hover={{ color: "gray" }}>
+            Brands
+          </Link>
           <Link
             _hover={{ color: "gray" }}
             display={{ md: "none", lg: "block", base: "none" }}
+            href="/products"
           >
             Offer Zone
           </Link>
-          <Link _hover={{ color: "gray" }}>Blogs</Link>
+          <Link href="/products" _hover={{ color: "gray" }}>
+            Blogs
+          </Link>
           <Link
+            href="/products"
             _hover={{ color: "gray" }}
             display={{ md: "none", lg: "block", base: "none" }}
           >
             Gift Card
           </Link>
           <Link
+            href="/products"
             _hover={{ color: "gray" }}
             display={{ md: "none", lg: "block", base: "none" }}
           >
             Customer Support
           </Link>
           <Link
+            href="/products"
             _hover={{ color: "gray" }}
             display={{ md: "none", lg: "block", base: "none" }}
           >

@@ -20,6 +20,8 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { RegisterPostData } from "../Redux/authReducer/action";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function RegisterPage() {
   const disatch = useDispatch();
@@ -36,13 +38,17 @@ export function RegisterPage() {
     try {
       const res = await disatch(RegisterPostData(formData));
       if (res.msg === "Registration Succesfully") {
-        alert(res.msg);
-        navigate("/login");
+        toast.success(res.msg);
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       } else if ("user Already Present") {
-        alert(res.msg);
-        navigate("/login");
+        toast.error(res.msg);
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
       } else {
-        alert(res.msg);
+        toast.error(res.msg);
       }
     } catch (error) {
       console.log(error);
@@ -60,6 +66,18 @@ export function RegisterPage() {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <Box
         rounded={"lg"}
         bg={useColorModeValue("white", "gray.700")}
